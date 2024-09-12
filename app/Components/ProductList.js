@@ -1,6 +1,6 @@
 // components/ProductList.js
 import ProductCard from './ProductCard';
-import './styles.css'; // Ensure this path is correct
+import '../globals.css'; // Adjust the path to correctly point to the globals.css file
 
 export default function ProductList({ products }) {
   return (

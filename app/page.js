@@ -1,4 +1,5 @@
 // pages/index.js
+import "./globals.css";
 import { Suspense } from 'react';
 import { fetchProducts } from '../app/lib/api';
 import ProductList from '../app/Components/ProductList';
