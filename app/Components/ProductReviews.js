@@ -1,3 +1,5 @@
+
+'use clent'; 
 export default function ProductReviews({ reviews }) {
     return (
       <div>

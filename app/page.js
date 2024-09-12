@@ -1,10 +1,10 @@
 // pages/index.js
 import "./globals.css";
 import { Suspense } from 'react';
-import { fetchProducts } from '../app/lib/api';
-import ProductList from '../app/Components/ProductList';
-import Pagination from '../app/Components/Pagination';
-import ErrorBoundary from '../app/Components/ErrorBoundary';
+import { fetchProducts } from './lib/api';
+import ProductList from './Components/ProductList';
+import Pagination from './Components/Pagination';
+import ErrorBoundary from './Components/ErrorBoundary';
 
 export default async function Home({ searchParams }) {
   const params = new URLSearchParams(searchParams);
