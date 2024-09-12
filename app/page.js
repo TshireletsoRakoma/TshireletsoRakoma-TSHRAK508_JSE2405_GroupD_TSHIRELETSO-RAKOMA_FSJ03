@@ -1,13 +1,13 @@
+// pages/index.js
 import { Suspense } from 'react';
-//import { useSearchParams } from 'next/navigation';
-import { fetchProducts } from '../lib/api';
-import ProductList from '../components/ProductList';
-import Pagination from '../components/Pagination';
-import ErrorBoundary from '../components/ErrorBoundary';
+import { fetchProducts } from '../app/lib/api';
+import ProductList from '../app/Components/ProductList';
+import Pagination from '../app/Components/Pagination';
+import ErrorBoundary from '../app/Components/ErrorBoundary';
 
-export default async function Home( {searchParams}) {
-  // const searchParams = useSearchParams();
-  const page = Number(searchParams.get('page')) || 1;
+export default async function Home({ searchParams }) {
+  const params = new URLSearchParams(searchParams);
+  const page = Number(params.get('page')) || 1;
 
   try {
     const products = await fetchProducts(page);
@@ -27,5 +27,3 @@ export default async function Home( {searchParams}) {
     return <p>Error: {error.message}</p>;
   }
 }
-
-

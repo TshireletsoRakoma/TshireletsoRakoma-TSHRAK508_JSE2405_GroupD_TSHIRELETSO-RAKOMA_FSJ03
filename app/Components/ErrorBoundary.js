@@ -1,5 +1,5 @@
+// components/ErrorBoundary.js
 'use client';
-
 import { useState } from 'react';
 
 export default function ErrorBoundary({ children, fallback }) {
