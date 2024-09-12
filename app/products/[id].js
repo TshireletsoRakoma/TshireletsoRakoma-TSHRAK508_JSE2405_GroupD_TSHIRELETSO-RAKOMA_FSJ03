@@ -1,6 +1,6 @@
-// app/products/[id].js
+// app/products/[id]/page.js
 import { useRouter } from 'next/router';
-import { fetchProductById } from '../../lib/api'; // Assuming you have an API method to fetch product by ID
+import { fetchProductById } from '../../../lib/api'; // Update the import path as needed
 
 export default function ProductDetails() {
   const router = useRouter();

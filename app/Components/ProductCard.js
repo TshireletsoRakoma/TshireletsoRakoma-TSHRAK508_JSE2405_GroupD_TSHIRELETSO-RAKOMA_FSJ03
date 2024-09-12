@@ -1,5 +1,5 @@
 // components/ProductCard.js
-import Link from 'next/link'; // Import Next.js Link component
+import Link from 'next/link';
 import ImageGallery from './ImageGallery';
 
 export default function ProductCard({ product }) {
