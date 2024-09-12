@@ -11,9 +11,9 @@ export default function ProductCard({ product }) {
         <p className="text-lg font-medium text-gray-700 mb-2">${product.price}</p>
         <p className="text-sm text-gray-500 mb-4">Category: {product.category}</p>
         <Link href={`/products/${product.id}`}>
-          <a className="inline-block px-4 py-2 bg-blue-500 text-white text-center rounded-lg hover:bg-blue-600 transition-colors duration-300">
+          <button className="inline-block px-4 py-2 bg-blue-500 text-white text-center rounded-lg hover:bg-blue-600 transition-colors duration-300">
             View Details
-          </a>
+          </button>
         </Link>
       </div>
     </div>
