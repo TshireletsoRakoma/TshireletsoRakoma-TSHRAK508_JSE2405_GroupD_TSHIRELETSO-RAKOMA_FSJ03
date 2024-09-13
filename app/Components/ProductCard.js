@@ -26,7 +26,7 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <div className="border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <div className="border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-gray-100">
       <ImageGallery images={product.images} />
       <div className="p-4">
         <h2 className="text-xl font-semibold text-gray-800 mb-2">{product.title}</h2>
