@@ -19,9 +19,12 @@ export async function fetchProducts(page = 1, limit = 20) {
 
 // Assuming that we will fetch all products and filter locally
 export async function fetchProductById(id) {
+  console.log('123')
   try {
     const products = await fetchProducts(); // Fetch all products
+    console.log(products)
     const product = products.find(p => p.id === id); // Find product by ID
+    console.log(product)
     if (!product) {
       throw new Error(`Product with ID: ${id} not found`);
     }

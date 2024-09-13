@@ -1,8 +1,13 @@
 // components/ProductCard.js
+'use client'
 import Link from 'next/link';
 import ImageGallery from './ImageGallery';
 
 export default function ProductCard({ product }) {
+
+  function clicked(){
+    console.log('clicked')
+  }
   return (
     <div className="border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <ImageGallery images={product.images} />
@@ -11,7 +16,7 @@ export default function ProductCard({ product }) {
         <p className="text-lg font-medium text-gray-700 mb-2">${product.price}</p>
         <p className="text-sm text-gray-500 mb-4">Category: {product.category}</p>
         <Link href={`/products/${product.id}`}>
-          <button className="inline-block px-4 py-2 bg-blue-500 text-white text-center rounded-lg hover:bg-blue-600 transition-colors duration-300">
+          <button onClick={clicked} className="inline-block px-4 py-2 bg-blue-500 text-white text-center rounded-lg hover:bg-blue-600 transition-colors duration-300">
             View Details
           </button>
         </Link>
