@@ -1,13 +1,30 @@
-// components/ProductCard.js
 'use client'
 import Link from 'next/link';
 import ImageGallery from './ImageGallery';
 
+/**
+ * ProductCard component displays a single product with an image gallery, title, price, and category.
+ * 
+ * @function ProductCard
+ * @param {Object} product - The product data to display.
+ * @param {string} product.id - Unique identifier for the product.
+ * @param {string} product.title - Title of the product.
+ * @param {string} product.price - Price of the product.
+ * @param {string[]} product.images - Array of image URLs for the product.
+ * @param {string} product.category - Category of the product.
+ * @returns {JSX.Element} The component rendering a single product card.
+ */
 export default function ProductCard({ product }) {
 
+  /**
+   * Handle click event for the 'View Details' button.
+   * 
+   * @function clicked
+   */
   function clicked(){
-    console.log('clicked')
+    console.log('clicked');
   }
+
   return (
     <div className="border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <ImageGallery images={product.images} />
