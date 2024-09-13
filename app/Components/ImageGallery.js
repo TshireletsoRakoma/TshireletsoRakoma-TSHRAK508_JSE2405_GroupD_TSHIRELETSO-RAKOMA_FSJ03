@@ -14,11 +14,11 @@ export default function ImageGallery({ images }) {
   };
 
   return (
-    <div className="relative mb-4">
+    <div className="relative w-full h-96 overflow-hidden mb-4 bg-gray-200 rounded-lg">
       <img
         src={images[currentIndex]}
         alt={`Product Image ${currentIndex + 1}`}
-        className="w-full h-64 object-cover rounded-lg"
+        className="object-contain w-full h-full transition-transform duration-300"
       />
       {images.length > 1 && (
         <div className="absolute top-1/2 transform -translate-y-1/2 w-full flex justify-between px-4">
