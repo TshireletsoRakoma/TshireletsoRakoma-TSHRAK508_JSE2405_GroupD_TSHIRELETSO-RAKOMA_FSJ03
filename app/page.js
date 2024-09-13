@@ -26,8 +26,8 @@ export default async function Home({ searchParams }) {
     return (
       <>
         <Header /> {/* Include the Header component */}
-        <main className="relative bg-gradient-to-r from-teal-100 via-purple-100 to-pink-100 p-8 min-h-screen">
-          <div className="absolute inset-0 bg-gradient-to-r from-teal-200 via-purple-200 to-pink-200 opacity-30 rounded-lg -z-10"></div>
+        <main className="relative animated-background p-8 min-h-screen">
+          <div className="overlay"></div>
           <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Our Products</h2>
           <ErrorBoundary fallback={<p>Error loading products. Please try again later.</p>}>
             <Suspense fallback={<p className="text-center text-gray-500">Loading products...</p>}>
@@ -42,8 +42,8 @@ export default async function Home({ searchParams }) {
     return (
       <>
         <Header /> {/* Include the Header component */}
-        <main className="bg-gradient-to-r from-teal-100 via-purple-100 to-pink-100 p-8 min-h-screen">
-          <div className="absolute inset-0 bg-gradient-to-r from-teal-200 via-purple-200 to-pink-200 opacity-30 rounded-lg -z-10"></div>
+        <main className="relative animated-background p-8 min-h-screen">
+          <div className="overlay"></div>
           <p className="text-center text-red-500 mt-8">Error: {error.message}</p>
         </main>
       </>
