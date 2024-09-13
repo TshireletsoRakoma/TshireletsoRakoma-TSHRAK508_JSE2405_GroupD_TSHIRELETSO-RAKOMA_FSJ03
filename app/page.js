@@ -26,8 +26,8 @@ export default async function Home({ searchParams }) {
     return (
       <>
         <Header /> {/* Include the Header component */}
-        <main>
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Products</h2>
+        <main className="bg-red-200 p-4"> {/* Added background color and padding */}
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Products</h2>
           <ErrorBoundary fallback={<p>Error loading products. Please try again later.</p>}>
             <Suspense fallback={<p>Loading products...</p>}>
               <ProductList products={products} />
