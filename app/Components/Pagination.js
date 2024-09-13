@@ -1,7 +1,15 @@
-"use client"
+'use client'
 
 import Link from 'next/link';
 
+/**
+ * Pagination component renders navigation links to paginate through pages.
+ * 
+ * @function Pagination
+ * @param {Object} props - The component props.
+ * @param {number} props.currentPage - The current page number.
+ * @returns {JSX.Element} The component rendering pagination controls.
+ */
 export default function Pagination({ currentPage }) {
   return (
     <div className="flex justify-center space-x-4 mt-4">
