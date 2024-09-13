@@ -87,7 +87,7 @@ export default function ProductDetails() {
   return (
     <>
       <Header /> {/* Include the Header component */}
-      <div className="p-8 max-w-6xl mx-auto bg-gradient-to-r from-blue-100 to-green-100 shadow-lg rounded-lg mb-8">
+      <div className="pt-20 p-8 max-w-6xl mx-auto bg-gradient-to-r from-blue-100 to-green-100 shadow-lg rounded-lg mb-8">
         <button
           onClick={handleGoBack}
           className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white py-2 px-4 rounded-lg mb-6 shadow-md hover:opacity-80 transition-opacity duration-300"
