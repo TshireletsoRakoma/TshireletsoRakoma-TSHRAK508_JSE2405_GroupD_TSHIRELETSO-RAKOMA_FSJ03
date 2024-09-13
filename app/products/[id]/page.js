@@ -5,41 +5,62 @@ import { useEffect, useState } from 'react';
 import { fetchProductById } from '../../lib/api';
 import ImageGallery from '../../Components/ImageGallery'; // Import ImageGallery
 
+/**
+ * ProductDetails component fetches and displays detailed information about a product.
+ * 
+ * @function ProductDetails
+ * @returns {JSX.Element} The component rendering the product details.
+ */
 export default function ProductDetails() {
-  const { id } = useParams();
-  const router = useRouter();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { id } = useParams(); // Get the product ID from URL parameters
+  const router = useRouter(); // Initialize the router for navigation
+  const [product, setProduct] = useState(null); // State to store product data
+  const [loading, setLoading] = useState(true); // State to manage loading state
+  const [error, setError] = useState(null); // State to manage errors
 
+  /**
+   * Fetch product details when the component mounts or the ID changes.
+   * 
+   * @function useEffect
+   */
   useEffect(() => {
     if (id) {
-      setLoading(true);
+      setLoading(true); // Set loading to true before fetching data
       fetchProductById(id)
         .then((data) => {
           console.log('Product data received:', data);
-          setProduct(data);
-          setLoading(false);
+          setProduct(data); // Set the fetched product data
+          setLoading(false); // Set loading to false after data is fetched
         })
         .catch((err) => {
           console.error('Error in component:', err);
-          setError(err.message || 'Failed to load product.');
-          setLoading(false);
+          setError(err.message || 'Failed to load product.'); // Set error message if fetching fails
+          setLoading(false); // Set loading to false if there's an error
         });
     }
   }, [id]);
 
+  /**
+   * Handle navigation to the previous page.
+   * 
+   * @function handleGoBack
+   */
   const handleGoBack = () => {
-    router.back();
+    router.back(); // Navigate to the previous page
   };
 
+  // Render loading state
   if (loading) return <p>Loading product with ID: {id}...</p>;
+
+  // Render error state
   if (error) return (
     <div>
       <p>Error loading product with ID: {id}</p>
       <p>Error details: {error}</p>
     </div>
   );
+
+  // Render product not found state
   if (!product) return <p>Product with ID: {id} not found.</p>;
 
   return (
@@ -48,27 +69,27 @@ export default function ProductDetails() {
         Go Back
       </button>
       <h1 className="text-2xl font-bold mb-4">{product.title}</h1>
-      <ImageGallery images={product.images} /> {/* Use ImageGallery component */}
+      <ImageGallery images={product.images} /> {/* Display the product images */}
       
-      {/* Category */}
+      {/* Display product category */}
       <p className="text-lg font-medium mb-2">Category: {product.category}</p>
       
-      {/* Tags */}
+      {/* Display product tags */}
       <p className="text-lg font-medium mb-2">Tags: {product.tags.join(', ')}</p>
       
-      {/* Price */}
+      {/* Display product price */}
       <p className="text-lg font-medium mb-2">Price: ${product.price}</p>
       
-      {/* Rating */}
+      {/* Display product rating */}
       <p className="text-lg mb-2">Rating: {product.rating} / 5</p>
       
-      {/* Stock and Availability */}
+      {/* Display product stock and availability */}
       <p className="text-lg mb-2">Stock: {product.stock} available</p>
       
-      {/* Description */}
+      {/* Display product description */}
       <p className="text-base mb-4">{product.description}</p>
 
-      {/* Reviews */}
+      {/* Display product reviews */}
       <div>
         <h2 className="text-xl font-semibold mb-2">Reviews</h2>
         {product.reviews && product.reviews.length > 0 ? (
