@@ -4,6 +4,7 @@ import { fetchProducts } from './lib/api';
 import ProductList from './Components/ProductList';
 import Pagination from './Components/Pagination';
 import ErrorBoundary from './Components/ErrorBoundary';
+import Header from "./Components/Header"; // Import the Header component
 
 /**
  * The main component for the homepage that displays a list of products.
@@ -23,17 +24,25 @@ export default async function Home({ searchParams }) {
     const products = await fetchProducts(page);
 
     return (
-      <main>
-        <h1>Our Products</h1>
-        <ErrorBoundary fallback={<p>Error loading products. Please try again later.</p>}>
-          <Suspense fallback={<p>Loading products...</p>}>
-            <ProductList products={products} />
-          </Suspense>
-        </ErrorBoundary>
-        <Pagination currentPage={page} />
-      </main>
+      <>
+        <Header /> {/* Include the Header component */}
+        <main>
+          <h1>Our Products</h1>
+          <ErrorBoundary fallback={<p>Error loading products. Please try again later.</p>}>
+            <Suspense fallback={<p>Loading products...</p>}>
+              <ProductList products={products} />
+            </Suspense>
+          </ErrorBoundary>
+          <Pagination currentPage={page} />
+        </main>
+      </>
     );
   } catch (error) {
-    return <p>Error: {error.message}</p>;
+    return (
+      <>
+        <Header /> {/* Include the Header component */}
+        <p>Error: {error.message}</p>
+      </>
+    );
   }
 }

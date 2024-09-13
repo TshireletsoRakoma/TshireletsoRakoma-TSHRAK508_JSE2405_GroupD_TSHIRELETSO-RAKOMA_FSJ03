@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { fetchProductById } from '../../lib/api';
 import ImageGallery from '../../Components/ImageGallery'; // Import ImageGallery
+import Header from '../../Components/Header'; 
 
 /**
  * ProductDetails component fetches and displays detailed information about a product.
