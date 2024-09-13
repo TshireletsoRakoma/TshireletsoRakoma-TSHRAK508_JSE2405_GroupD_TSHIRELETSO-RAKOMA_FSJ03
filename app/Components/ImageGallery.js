@@ -1,14 +1,27 @@
-// components/ImageGallery.js
 'use client';
 import { useState } from 'react';
 
+/**
+ * ImageGallery component displays a carousel of images with navigation controls.
+ * 
+ * @function ImageGallery
+ * @param {Object} props - The component props.
+ * @param {string[]} props.images - Array of image URLs to be displayed in the gallery.
+ * @returns {JSX.Element} The component rendering the image gallery.
+ */
 export default function ImageGallery({ images }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  /**
+   * Handle the action to show the previous image in the gallery.
+   */
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
+  /**
+   * Handle the action to show the next image in the gallery.
+   */
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
