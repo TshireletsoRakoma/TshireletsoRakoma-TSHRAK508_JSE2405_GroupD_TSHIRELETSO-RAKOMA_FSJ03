@@ -1,4 +1,12 @@
 /* globals.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+/**
+ * Import Tailwind CSS directives.
+ * 
+ * This file includes Tailwind CSS directives to apply base styles, components, and utility classes.
+ */
+
+ @tailwind base;
+ @tailwind components;
+ @tailwind utilities;
+ 
