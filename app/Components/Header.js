@@ -3,17 +3,18 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import SearchBar from './SearchBar'; // Import the SearchBar component
-import Sort from './Sort'; // Import the Sort component
 
 /**
  * Header component for site navigation.
  * 
  * @function Header
- * @returns {JSX.Element} The header component rendering navigation links.
+ * @param {Object} props - The component props.
+ * @param {string} props.sortOrder - The current sort order.
+ * @param {Function} props.setSortOrder - The function to set the sort order.
+ * @returns {JSX.Element} The header component rendering navigation links and sort order selection.
  */
-export default function Header() {
+export default function Header({ sortOrder, setSortOrder }) {
   const [searchTerm, setSearchTerm] = useState(''); // State for the search term
-  const [sortOrder, setSortOrder] = useState('asc'); // State for sort order
 
   return (
     <header className="bg-blue-600 text-white p-4">
@@ -30,10 +31,17 @@ export default function Header() {
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </div>
 
-        {/* Sort Options */}
-        <div className="mx-4">
-          <Sort sortOrder={sortOrder} setSortOrder={setSortOrder} />
-        </div>
+        {/* Sort Order Selection */}
+        <select
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+          className="bg-blue-700 text-white rounded p-2"
+        >
+          <option value="">Sort by</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+          {/* Add more sorting options as needed */}
+        </select>
 
         {/* Navigation Links */}
         <nav className="space-x-4">
@@ -54,7 +62,6 @@ export default function Header() {
         
         {/* User Authentication / Login / Logout */}
         <div>
-          {/* Example of conditional rendering for user auth */}
           <Link href="/login" className="hover:text-gray-200">
             Login
           </Link>

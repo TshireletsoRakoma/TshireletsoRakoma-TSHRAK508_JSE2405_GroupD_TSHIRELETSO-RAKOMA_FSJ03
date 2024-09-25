@@ -14,12 +14,23 @@ import ProductCard from './ProductCard';
  * @param {string[]} products[].tags - Array of tags associated with the product.
  * @param {number} products[].stock - Number of items available in stock.
  * @param {string} products[].description - Description of the product.
+ * @param {string} sortOrder - The current sort order.
  * @returns {JSX.Element} The component rendering a grid of `ProductCard` components.
  */
-export default function ProductList({ products }) {
+export default function ProductList({ products, sortOrder }) {
+  // Sorting logic
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sortOrder === 'asc') {
+      return a.price - b.price; // Sort ascending by price
+    } else if (sortOrder === 'desc') {
+      return b.price - a.price; // Sort descending by price
+    }
+    return 0; // No sorting if sortOrder is empty
+  });
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
-      {products.map((product) => (
+      {sortedProducts.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </div>
