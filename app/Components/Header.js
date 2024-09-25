@@ -1,6 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
+import SearchBar from './SearchBar'; // Import the SearchBar component
+import Sort from './Sort'; // Import the Sort component
 
 /**
  * Header component for site navigation.
@@ -9,6 +12,9 @@ import Link from 'next/link';
  * @returns {JSX.Element} The header component rendering navigation links.
  */
 export default function Header() {
+  const [searchTerm, setSearchTerm] = useState(''); // State for the search term
+  const [sortOrder, setSortOrder] = useState('asc'); // State for sort order
+
   return (
     <header className="bg-blue-600 text-white p-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -18,7 +24,17 @@ export default function Header() {
             MyProductStore
           </Link>
         </h1>
-        
+
+        {/* Search Bar */}
+        <div className="flex-1 mx-4"> {/* Added a wrapper for layout */}
+          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        </div>
+
+        {/* Sort Options */}
+        <div className="mx-4">
+          <Sort sortOrder={sortOrder} setSortOrder={setSortOrder} />
+        </div>
+
         {/* Navigation Links */}
         <nav className="space-x-4">
           <Link href="/" className="hover:text-gray-200">

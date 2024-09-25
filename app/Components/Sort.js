@@ -1,6 +1,18 @@
 // /src/components/Sort.js
-import React from 'react';
 
+'use client';
+
+import PropTypes from 'prop-types';
+
+/**
+ * Sort component for selecting sorting options.
+ * 
+ * @function Sort
+ * @param {Object} props - Component properties
+ * @param {string} props.sortOrder - Current sorting order
+ * @param {Function} props.setSortOrder - Function to update sorting order
+ * @returns {JSX.Element} The sort component rendering sorting options.
+ */
 const Sort = ({ sortOrder, setSortOrder }) => {
   return (
     <select
@@ -12,6 +24,11 @@ const Sort = ({ sortOrder, setSortOrder }) => {
       <option value="desc">Price: High to Low</option>
     </select>
   );
+};
+
+Sort.propTypes = {
+  sortOrder: PropTypes.string.isRequired,
+  setSortOrder: PropTypes.func.isRequired,
 };
 
 export default Sort;
