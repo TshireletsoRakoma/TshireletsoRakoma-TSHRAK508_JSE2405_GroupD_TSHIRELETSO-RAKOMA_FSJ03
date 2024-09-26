@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * ProductReviews component displays a list of product reviews.
  * 
@@ -20,10 +18,10 @@ export default function ProductReviews({ reviews }) {
         <div className="space-y-4">
           {reviews.map((review) => (
             <div key={review.id} className="border p-4 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold">{review.name}</h3>
+              <h3 className="text-xl font-bold">{review.name}</h3> {/* Reviewer Name */}
               <p className="text-gray-600">Rating: {review.rating}/5</p>
               <p className="text-gray-600">Date: {new Date(review.createdAt).toLocaleDateString()}</p>
-              <p>{review.comment}</p>
+              <p className="mt-2">{review.comment}</p> {/* Review Comment */}
             </div>
           ))}
         </div>

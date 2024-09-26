@@ -124,7 +124,7 @@ export default function ProductDetails() {
             <ul className="space-y-4">
               {product.reviews.map((review, index) => (
                 <li key={index} className="border-b border-gray-300 pb-4">
-                  <p className="font-semibold text-gray-800">{review.name}</p>
+                  <p className="font-semibold text-gray-800">{review.reviewerName}</p>
                   <p className="text-sm text-gray-500">{new Date(review.date).toLocaleDateString()}</p>
                   <p className="mt-1">Rating: {renderStars(review.rating)}</p>
                   <p className="mt-1 text-gray-700">{review.comment}</p>
