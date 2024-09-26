@@ -1,3 +1,4 @@
+// app/page.js
 'use client';  // Mark this component as a Client Component
 
 import "./globals.css";
@@ -28,6 +29,7 @@ export default function Home({ searchParams }) {
 
   // Function to fetch products
   const fetchProductData = async () => {
+    setError(null); // Reset error before fetching
     try {
       const fetchedProducts = await fetchProducts(page, 20, searchTerm); // Fetch products with search term
       setProducts(fetchedProducts); // Update state with fetched products
