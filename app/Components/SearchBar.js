@@ -1,38 +1,26 @@
-// SearchBar.js
+import React from 'react';
 
-import { useEffect } from 'react';
-
-/**
- * SearchBar component for searching products.
- * 
- * @function SearchBar
- * @param {string} searchTerm - The current search term.
- * @param {Function} setSearchTerm - Function to update the search term.
- * @returns {JSX.Element} The rendered search bar component.
- */
 const SearchBar = ({ searchTerm, setSearchTerm }) => {
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value); // Update search term
   };
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (searchTerm) {
-      params.set('search', searchTerm);
-    } else {
-      params.delete('search');
-    }
-    window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
-  }, [searchTerm]);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    // Optionally, you can trigger fetching here if not handled automatically
+  };
 
   return (
-    <input
-      type="text"
-      value={searchTerm}
-      onChange={handleChange}
-      placeholder="Search products..."
-      className="bg-white text-black rounded p-2"
-    />
+    <form onSubmit={handleSearch} className="mb-4">
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleChange}
+        placeholder="Search for products..."
+        className="border p-2 rounded"
+      />
+      <button type="submit" className="bg-blue-500 text-white p-2 rounded">Search</button>
+    </form>
   );
 };
 

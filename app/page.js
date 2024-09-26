@@ -1,8 +1,7 @@
-// Home.js
 'use client';  // Mark this component as a Client Component
 
 import "./globals.css";
-import { useEffect, useState, Suspense } from 'react'; // Import Suspense from React
+import { useEffect, useState } from 'react'; // Import useEffect for fetching data
 import { fetchProducts } from './lib/api';
 import ProductList from './Components/ProductList';
 import Pagination from './Components/Pagination';
@@ -53,13 +52,11 @@ export default function Home({ searchParams }) {
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         
         <ErrorBoundary fallback={<p>Error loading products. Please try again later.</p>}>
-          <Suspense fallback={<p className="text-center text-gray-500">Loading products...</p>}>
-            {error ? (
-              <p className="text-center text-red-500 mt-8">Error: {error.message}</p> // Display error message
-            ) : (
-              <ProductList products={products} /> // Render product list
-            )}
-          </Suspense>
+          {error ? (
+            <p className="text-center text-red-500 mt-8">Error: {error.message}</p> // Display error message
+          ) : (
+            <ProductList products={products} /> // Render product list
+          )}
         </ErrorBoundary>
         
         <Pagination currentPage={page} />
