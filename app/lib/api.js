@@ -1,17 +1,18 @@
 /**
- * Fetch a paginated list of products from the API with optional search query.
+ * Fetch a paginated list of products from the API with optional search query and sorting order.
  *
  * @param {number} [page=1] - The page number to fetch.
  * @param {number} [limit=20] - The number of products to return per page.
  * @param {string} [searchTerm=""] - The search term to filter the products.
+ * @param {string} [sortOrder="asc"] - The order to sort the products (asc or desc).
  * @returns {Promise<Object>} The list of products.
  * @throws {Error} Throws an error if the fetch request fails.
  */
-export async function fetchProducts(page = 1, limit = 20, searchTerm = "") {
+export async function fetchProducts(page = 1, limit = 20, searchTerm = "", sortOrder = "asc") {
   const skip = (page - 1) * limit;
   
   // Base URL for fetching products
-  let url = `https://next-ecommerce-api.vercel.app/products?limit=${limit}&skip=${skip}`;
+  let url = `https://next-ecommerce-api.vercel.app/products?limit=${limit}&skip=${skip}&sort=${sortOrder}`;
 
   // Append search term to the URL if provided
   if (searchTerm) {

@@ -1,4 +1,3 @@
-// app/page.js
 'use client';  // Mark this component as a Client Component
 
 import "./globals.css";
@@ -9,6 +8,7 @@ import Pagination from './Components/Pagination';
 import ErrorBoundary from './Components/ErrorBoundary';
 import Header from "./Components/Header";
 import SearchBar from './Components/SearchBar'; // Import the SearchBar component
+import Sort from './Components/Sort'; // Import the Sort component
 
 /**
  * The main component for the homepage that displays a list of products.
@@ -24,24 +24,25 @@ export default function Home({ searchParams }) {
   const params = new URLSearchParams(searchParams);
   const page = Number(params.get('page')) || 1;
   const [searchTerm, setSearchTerm] = useState(params.get('search') || "");
+  const [sortOrder, setSortOrder] = useState("asc"); // State to manage sorting order
   const [products, setProducts] = useState([]); // State to store fetched products
   const [error, setError] = useState(null); // State to store error if occurs
 
-  // Function to fetch products
+  // Function to fetch products with search term and sort order
   const fetchProductData = async () => {
     setError(null); // Reset error before fetching
     try {
-      const fetchedProducts = await fetchProducts(page, 20, searchTerm); // Fetch products with search term
+      const fetchedProducts = await fetchProducts(page, 20, searchTerm, sortOrder); // Fetch products with search term
       setProducts(fetchedProducts); // Update state with fetched products
     } catch (error) {
       setError(error); // Update error state
     }
   };
 
-  // Use effect to fetch products when page or searchTerm changes
+  // Use effect to fetch products when page, searchTerm, or sortOrder changes
   useEffect(() => {
     fetchProductData();
-  }, [page, searchTerm]); // Re-fetch when page or searchTerm changes
+  }, [page, searchTerm, sortOrder]); // Re-fetch when page, searchTerm, or sortOrder changes
 
   return (
     <>
@@ -50,8 +51,9 @@ export default function Home({ searchParams }) {
         <div className="overlay"></div>
         <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Our Products</h2>
         
-        {/* Add SearchBar */}
+        {/* Add SearchBar and Sort Component */}
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <Sort sortOrder={sortOrder} setSortOrder={setSortOrder} /> {/* Add Sort component */}
         
         <ErrorBoundary fallback={<p>Error loading products. Please try again later.</p>}>
           {error ? (
