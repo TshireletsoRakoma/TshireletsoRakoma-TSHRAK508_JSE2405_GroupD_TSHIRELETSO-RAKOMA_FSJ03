@@ -71,6 +71,15 @@ export default function Home({ searchParams }) {
     ? products.filter(product => product.category === selectedCategory)
     : products;
 
+  // Sort filtered products based on sortOrder
+  const sortedProducts = filteredProducts.sort((a, b) => {
+    if (sortOrder === 'asc') {
+      return a.price - b.price; // Sort by price ascending
+    } else {
+      return b.price - a.price; // Sort by price descending
+    }
+  });
+
   return (
     <>
       <Header />
@@ -91,7 +100,7 @@ export default function Home({ searchParams }) {
           {error ? (
             <p className="text-center text-red-500 mt-8">Error: {error.message}</p> // Display error message
           ) : (
-            <ProductList products={filteredProducts} /> // Render filtered product list
+            <ProductList products={sortedProducts} /> // Render sorted product list
           )}
         </ErrorBoundary>
         
