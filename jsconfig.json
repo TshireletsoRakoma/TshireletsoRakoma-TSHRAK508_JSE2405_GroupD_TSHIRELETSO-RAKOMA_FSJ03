@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],  // Default for root-level imports
+      "@/api": ["./lib/api.js"]  // Adjust to actual location of your API file
     }
-  }
+  },
+  "include": ["**/*.js", "**/*.jsx"] // Ensure proper file inclusion
 }

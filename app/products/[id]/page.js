@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { fetchProductById } from '../../lib/api';
@@ -19,6 +19,7 @@ export default function ProductDetails() {
   const [product, setProduct] = useState(null); // State to store product data
   const [loading, setLoading] = useState(true); // State to manage loading state
   const [error, setError] = useState(null); // State to manage errors
+  const [sortBy, setSortBy] = useState('date'); // State for sorting criteria
 
   /**
    * Fetch product details when the component mounts or the ID changes.
@@ -84,6 +85,18 @@ export default function ProductDetails() {
     );
   };
 
+  // Function to sort reviews
+  const sortedReviews = () => {
+    return product.reviews.slice().sort((a, b) => {
+      if (sortBy === 'date') {
+        return new Date(b.date) - new Date(a.date); // Sort by date (newest first)
+      } else if (sortBy === 'rating') {
+        return b.rating - a.rating; // Sort by rating (highest first)
+      }
+      return 0;
+    });
+  };
+
   return (
     <>
       <Header /> {/* Include the Header component */}
@@ -117,12 +130,26 @@ export default function ProductDetails() {
           <p className="text-base mb-6 text-gray-700">{product.description}</p>
         </div>
 
+        {/* Sorting options for reviews */}
+        <div className="mb-4">
+          <label htmlFor="sortBy" className="font-semibold text-gray-800">Sort Reviews By:</label>
+          <select
+            id="sortBy"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="ml-2 border border-gray-300 rounded-md p-2"
+          >
+            <option value="date">Date</option>
+            <option value="rating">Rating</option>
+          </select>
+        </div>
+
         {/* Display product reviews */}
         <div className="bg-white p-6 rounded-lg shadow-lg border-t-8 border-gradient-to-r from-teal-400 via-blue-500 to-indigo-600">
           <h2 className="text-2xl font-extrabold text-gray-800 mb-4">Reviews</h2>
           {product.reviews && product.reviews.length > 0 ? (
             <ul className="space-y-4">
-              {product.reviews.map((review, index) => (
+              {sortedReviews().map((review, index) => (
                 <li key={index} className="border-b border-gray-300 pb-4">
                   <p className="font-semibold text-gray-800">{review.reviewerName}</p>
                   <p className="text-sm text-gray-500">{new Date(review.date).toLocaleDateString()}</p>
