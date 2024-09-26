@@ -5,16 +5,23 @@ import { useState } from 'react';
 import SearchBar from './SearchBar'; // Import the SearchBar component
 
 /**
- * Header component for site navigation.
- * 
+ * Header component for site navigation and filtering.
+ *
  * @function Header
  * @param {Object} props - The component props.
  * @param {string} props.sortOrder - The current sort order.
- * @param {Function} props.setSortOrder - The function to set the sort order.
- * @returns {JSX.Element} The header component rendering navigation links and sort order selection.
+ * @param {Function} props.setSortOrder - Function to update sort order.
+ * @param {Function} props.setSearchTerm - Function to update search term.
+ * @returns {JSX.Element} The header component rendering navigation and filters.
  */
-export default function Header({ sortOrder, setSortOrder }) {
-  const [searchTerm, setSearchTerm] = useState(''); // State for the search term
+export default function Header({ sortOrder, setSortOrder, setSearchTerm }) {
+  const [searchValue, setSearchValue] = useState(''); // Local state for search input
+
+  // Handle search term update
+  const handleSearch = (e) => {
+    setSearchValue(e.target.value);
+    setSearchTerm(e.target.value); // Update parent component's search term state
+  };
 
   return (
     <header className="bg-blue-600 text-white p-4">
@@ -27,8 +34,8 @@ export default function Header({ sortOrder, setSortOrder }) {
         </h1>
 
         {/* Search Bar */}
-        <div className="flex-1 mx-4"> {/* Added a wrapper for layout */}
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <div className="flex-1 mx-4">
+          <SearchBar value={searchValue} onChange={handleSearch} />
         </div>
 
         {/* Sort Order Selection */}
@@ -37,10 +44,8 @@ export default function Header({ sortOrder, setSortOrder }) {
           onChange={(e) => setSortOrder(e.target.value)}
           className="bg-blue-700 text-white rounded p-2"
         >
-          <option value="">Sort by</option>
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
-          {/* Add more sorting options as needed */}
         </select>
 
         {/* Navigation Links */}
@@ -57,10 +62,9 @@ export default function Header({ sortOrder, setSortOrder }) {
           <Link href="/cart" className="hover:text-gray-200">
             Cart
           </Link>
-          {/* Add more navigation links as needed */}
         </nav>
-        
-        {/* User Authentication / Login / Logout */}
+
+        {/* Login/Logout */}
         <div>
           <Link href="/login" className="hover:text-gray-200">
             Login

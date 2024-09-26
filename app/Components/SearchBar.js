@@ -1,3 +1,5 @@
+// SearchBar.js
+
 import { useEffect } from 'react';
 
 /**
