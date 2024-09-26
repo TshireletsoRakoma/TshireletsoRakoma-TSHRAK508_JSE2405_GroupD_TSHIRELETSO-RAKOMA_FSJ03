@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import SearchBar from './SearchBar'; // Import the SearchBar component
+// Import the SearchBar component
 
 /**
  * Header component for site navigation and filtering.
@@ -33,20 +33,9 @@ export default function Header({ sortOrder, setSortOrder, setSearchTerm }) {
           </Link>
         </h1>
 
-        {/* Search Bar */}
-        <div className="flex-1 mx-4">
-          <SearchBar value={searchValue} onChange={handleSearch} />
-        </div>
+       
 
-        {/* Sort Order Selection */}
-        <select
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-          className="bg-blue-700 text-white rounded p-2"
-        >
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
+      
 
         {/* Navigation Links */}
         <nav className="space-x-4">

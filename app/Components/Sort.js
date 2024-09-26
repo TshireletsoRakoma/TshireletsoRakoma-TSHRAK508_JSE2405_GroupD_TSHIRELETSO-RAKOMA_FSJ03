@@ -1,34 +1,27 @@
-// /src/components/Sort.js
-
-'use client';
-
-import PropTypes from 'prop-types';
+import React from 'react';
 
 /**
- * Sort component for selecting sorting options.
- * 
- * @function Sort
- * @param {Object} props - Component properties
- * @param {string} props.sortOrder - Current sorting order
- * @param {Function} props.setSortOrder - Function to update sorting order
- * @returns {JSX.Element} The sort component rendering sorting options.
+ * Sort component that allows users to select sorting order.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.sortOrder - The current sorting order.
+ * @param {Function} props.setSortOrder - Function to update the sorting order.
+ * @returns {JSX.Element} The rendered sort component.
  */
 const Sort = ({ sortOrder, setSortOrder }) => {
-  return (
-    <select
-      value={sortOrder}
-      onChange={(e) => setSortOrder(e.target.value)}
-      className="border rounded p-2 mb-4"
-    >
-      <option value="asc">Price: Low to High</option>
-      <option value="desc">Price: High to Low</option>
-    </select>
-  );
-};
+  const handleSortChange = (event) => {
+    setSortOrder(event.target.value); // Update the sort order
+  };
 
-Sort.propTypes = {
-  sortOrder: PropTypes.string.isRequired,
-  setSortOrder: PropTypes.func.isRequired,
+  return (
+    <div className="mb-4">
+      <label htmlFor="sortOrder" className="mr-2">Sort By:</label>
+      <select id="sortOrder" value={sortOrder} onChange={handleSortChange}>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
+  );
 };
 
 export default Sort;

@@ -19,12 +19,16 @@ export async function fetchProducts(page = 1, limit = 20, searchTerm = "", sortO
     url += `&search=${encodeURIComponent(searchTerm)}`;
   }
 
+  console.log(`Fetching products from URL: ${url}`); // Debug log for URL being fetched
+
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error('Failed to fetch products');
     }
-    return await response.json();
+    const data = await response.json();
+    console.log('Fetched products:', data); // Debug log for fetched products
+    return data;
   } catch (error) {
     console.error('Error fetching products:', error);
     throw error;
