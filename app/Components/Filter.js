@@ -1,6 +1,15 @@
-// /src/components/Filter.js
 import React from 'react';
 
+/**
+ * Filter component for selecting a category from a dropdown.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.selectedCategory - The currently selected category.
+ * @param {Function} props.setSelectedCategory - The function to update the selected category.
+ * @param {Array<string>} props.categories - The list of available categories.
+ * 
+ * @returns {JSX.Element} A dropdown select element for category filtering.
+ */
 const Filter = ({ selectedCategory, setSelectedCategory, categories }) => {
   return (
     <select
