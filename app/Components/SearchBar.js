@@ -6,27 +6,18 @@ import React from 'react';
  * @param {Object} props - The component props.
  * @param {string} props.searchTerm - The current search term entered by the user.
  * @param {Function} props.setSearchTerm - The function to update the search term.
+ * @param {Function} props.updateURL - Function to update the URL based on search.
  * 
  * @returns {JSX.Element} A search form with an input field and a submit button.
  */
-const SearchBar = ({ searchTerm, setSearchTerm }) => {
-  /**
-   * Handles changes to the search input.
-   * 
-   * @param {React.ChangeEvent<HTMLInputElement>} e - The change event triggered by input.
-   */
+const SearchBar = ({ searchTerm, setSearchTerm, updateURL }) => {
   const handleChange = (e) => {
     setSearchTerm(e.target.value); // Update search term
   };
 
-  /**
-   * Handles form submission.
-   * 
-   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
-   */
   const handleSearch = (e) => {
     e.preventDefault();
-    // Optionally, trigger search fetch here if necessary
+    updateURL(searchTerm); // Update URL on search
   };
 
   return (

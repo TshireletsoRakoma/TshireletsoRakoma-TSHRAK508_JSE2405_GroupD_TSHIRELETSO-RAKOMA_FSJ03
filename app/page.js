@@ -56,6 +56,15 @@ export default function Home({ searchParams }) {
     }
   };
 
+  // Function to update URL parameters
+  const updateURLParameters = () => {
+    const url = new URL(window.location);
+    url.searchParams.set('search', searchTerm);
+    url.searchParams.set('category', selectedCategory);
+    url.searchParams.set('sort', sortOrder);
+    window.history.pushState({}, '', url);
+  };
+
   // Use effect to fetch products when page, searchTerm or sortOrder changes
   useEffect(() => {
     fetchProductData();
@@ -65,6 +74,11 @@ export default function Home({ searchParams }) {
   useEffect(() => {
     fetchCategories();
   }, []);
+
+  // Use effect to update URL parameters on filter changes
+  useEffect(() => {
+    updateURLParameters();
+  }, [searchTerm, selectedCategory, sortOrder]);
 
   // Filter products based on selected category
   const filteredProducts = selectedCategory
@@ -79,6 +93,13 @@ export default function Home({ searchParams }) {
       return b.price - a.price; // Sort by price descending
     }
   });
+
+  // Reset functionality to clear filters
+  const handleReset = () => {
+    setSearchTerm('');
+    setSelectedCategory('');
+    setSortOrder('asc'); // Reset sort order to default
+  };
 
   return (
     <>
@@ -95,6 +116,11 @@ export default function Home({ searchParams }) {
         
         {/* Add Filter Component */}
         <Filter selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} categories={categories} />
+
+        {/* Add Reset Button */}
+        <button onClick={handleReset} className="bg-red-500 text-white p-2 rounded mb-4">
+          Reset Filters
+        </button>
 
         <ErrorBoundary fallback={<p>Error loading products. Please try again later.</p>}>
           {error ? (
