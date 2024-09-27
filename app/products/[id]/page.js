@@ -6,6 +6,7 @@ import ImageGallery from '../../Components/ImageGallery'; // Import ImageGallery
 import Header from '../../Components/Header'; // Import Header
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt, faStar as faStarEmpty } from '@fortawesome/free-solid-svg-icons';
+import Head from 'next/head'; // Import Head from next/head
 
 /**
  * ProductDetails component fetches and displays detailed information about a product.
@@ -42,6 +43,16 @@ export default function ProductDetails() {
         });
     }
   }, [id]);
+
+  // Set dynamic meta tags using product title and description
+  useEffect(() => {
+    if (product) {
+      document.title = product.title; // Set the browser tab title
+      document
+        .querySelector("meta[name='description']")
+        .setAttribute("content", product.description); // Set the meta description
+    }
+  }, [product]);
 
   /**
    * Handle navigation to the previous page.
@@ -99,6 +110,10 @@ export default function ProductDetails() {
 
   return (
     <>
+      <Head>
+        <title>{product.title}</title> {/* Set the dynamic title */}
+        <meta name="description" content={product.description} /> {/* Set the dynamic description */}
+      </Head>
       <Header /> {/* Include the Header component */}
       <div className="pt-20 p-8 max-w-6xl mx-auto bg-gradient-to-r from-blue-100 to-green-100 shadow-lg rounded-lg mb-8">
         <button

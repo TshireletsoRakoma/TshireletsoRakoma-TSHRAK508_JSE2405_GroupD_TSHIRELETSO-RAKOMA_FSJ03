@@ -11,15 +11,13 @@
 export async function fetchProducts(page = 1, limit = 20, searchTerm = "", sortOrder = "asc") {
   const skip = (page - 1) * limit;
   
-  // Base URL for fetching products
   let url = `https://next-ecommerce-api.vercel.app/products?limit=${limit}&skip=${skip}&sort=${sortOrder}`;
-
-  // Append search term to the URL if provided
+  
   if (searchTerm) {
     url += `&search=${encodeURIComponent(searchTerm)}`;
   }
 
-  console.log(`Fetching products from URL: ${url}`); // Debug log for URL being fetched
+  console.log(`Fetching products from URL: ${url}`);
 
   try {
     const response = await fetch(url);
@@ -27,7 +25,7 @@ export async function fetchProducts(page = 1, limit = 20, searchTerm = "", sortO
       throw new Error('Failed to fetch products');
     }
     const data = await response.json();
-    console.log('Fetched products:', data); // Debug log for fetched products
+    console.log('Fetched products:', data);
     return data;
   } catch (error) {
     console.error('Error fetching products:', error);
