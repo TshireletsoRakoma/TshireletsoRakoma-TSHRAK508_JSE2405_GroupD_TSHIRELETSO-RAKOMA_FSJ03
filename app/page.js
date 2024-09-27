@@ -32,11 +32,13 @@ export default function Home({ searchParams }) {
   const [error, setError] = useState(null); // State to store error if occurs
   const [selectedCategory, setSelectedCategory] = useState(''); // State for selected category
   const [categories, setCategories] = useState([]); // State for categories
+  const [loading, setLoading] = useState(true); // State for loading indicator
 
   // Function to fetch products
   const fetchProductData = async () => {
     console.log("Fetching products with:", { page, searchTerm, sortOrder }); // Debug log
     setError(null); // Reset error before fetching
+    setLoading(true); // Set loading to true before fetching
     try {
       const fetchedProducts = await fetchProducts(1, 9999, searchTerm, sortOrder); // Fetch all products (or max number) without pagination
       console.log('Fetched products:', fetchedProducts); // Debug log for fetched products
@@ -44,6 +46,8 @@ export default function Home({ searchParams }) {
     } catch (error) {
       console.error("Error fetching products:", error); // Log the error
       setError(error); // Update error state
+    } finally {
+      setLoading(false); // Set loading to false after fetching is complete
     }
   };
 
@@ -129,11 +133,13 @@ export default function Home({ searchParams }) {
           {/* Add SearchBar */}
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-          {/* Add Sort Component */}
-          <Sort sortOrder={sortOrder} setSortOrder={setSortOrder} />
-          
-          {/* Add Filter Component */}
-          <Filter selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} categories={categories} />
+          <div className="flex justify-between mb-4">
+            {/* Add Sort Component */}
+            <Sort sortOrder={sortOrder} setSortOrder={setSortOrder} />
+
+            {/* Add Filter Component */}
+            <Filter selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} categories={categories} />
+          </div>
 
           {/* Add Reset Button */}
           <button onClick={handleReset} className="bg-red-500 text-white p-2 rounded mb-4">
@@ -141,7 +147,11 @@ export default function Home({ searchParams }) {
           </button>
 
           <ErrorBoundary fallback={<p>Error loading products. Please try again later.</p>}>
-            {error ? (
+            {loading ? ( // Show loader while loading
+              <div className="flex justify-center items-center">
+                <div className="loader"></div> {/* Loader Component */}
+              </div>
+            ) : error ? (
               <p className="text-center text-red-500 mt-8">Error: {error.message}</p> // Display error message
             ) : (
               <ProductList products={displayedProducts} /> // Render products for current page
@@ -150,6 +160,22 @@ export default function Home({ searchParams }) {
           
           <Pagination currentPage={page} />
         </main>
+
+        <style jsx>{`
+          .loader {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite; /* Rotate animation */
+          }
+
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
       </>
     </ProductProvider>
   );

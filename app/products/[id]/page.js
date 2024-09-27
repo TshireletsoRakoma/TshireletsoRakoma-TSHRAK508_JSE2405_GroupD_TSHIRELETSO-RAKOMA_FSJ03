@@ -2,71 +2,56 @@
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { fetchProductById } from '../../lib/api';
-import ImageGallery from '../../Components/ImageGallery'; // Import ImageGallery
-import Header from '../../Components/Header'; // Import Header
+import ImageGallery from '../../Components/ImageGallery';
+import Header from '../../Components/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt, faStar as faStarEmpty } from '@fortawesome/free-solid-svg-icons';
-import Head from 'next/head'; // Import Head from next/head
+import Head from 'next/head';
 
-/**
- * ProductDetails component fetches and displays detailed information about a product.
- * 
- * @function ProductDetails
- * @returns {JSX.Element} The component rendering the product details.
- */
+// New Loader component
+const Loader = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+);
+
 export default function ProductDetails() {
-  const { id } = useParams(); // Get the product ID from URL parameters
-  const router = useRouter(); // Initialize the router for navigation
-  const [product, setProduct] = useState(null); // State to store product data
-  const [loading, setLoading] = useState(true); // State to manage loading state
-  const [error, setError] = useState(null); // State to manage errors
-  const [sortBy, setSortBy] = useState('date'); // State for sorting criteria
+  const { id } = useParams();
+  const router = useRouter();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [sortBy, setSortBy] = useState('date');
 
-  /**
-   * Fetch product details when the component mounts or the ID changes.
-   * 
-   * @function useEffect
-   */
   useEffect(() => {
     if (id) {
-      setLoading(true); // Set loading to true before fetching data
+      setLoading(true);
       fetchProductById(id)
         .then((data) => {
-          console.log('Product data received:', data);
-          setProduct(data); // Set the fetched product data
-          setLoading(false); // Set loading to false after data is fetched
+          setProduct(data);
+          setLoading(false);
         })
         .catch((err) => {
-          console.error('Error in component:', err);
-          setError(err.message || 'Failed to load product.'); // Set error message if fetching fails
-          setLoading(false); // Set loading to false if there's an error
+          setError(err.message || 'Failed to load product.');
+          setLoading(false);
         });
     }
   }, [id]);
 
-  // Set dynamic meta tags using product title and description
   useEffect(() => {
     if (product) {
-      document.title = product.title; // Set the browser tab title
-      document
-        .querySelector("meta[name='description']")
-        .setAttribute("content", product.description); // Set the meta description
+      document.title = product.title;
+      document.querySelector("meta[name='description']").setAttribute("content", product.description);
     }
   }, [product]);
 
-  /**
-   * Handle navigation to the previous page.
-   * 
-   * @function handleGoBack
-   */
   const handleGoBack = () => {
-    router.back(); // Navigate to the previous page
+    router.back();
   };
 
-  // Render loading state
-  if (loading) return <p className="text-center text-gray-500">Loading product with ID: {id}...</p>;
+  // Updated loading state
+  if (loading) return <Loader />;
 
-  // Render error state
   if (error) return (
     <div className="text-center text-red-500">
       <p>Error loading product with ID: {id}</p>
@@ -74,10 +59,8 @@ export default function ProductDetails() {
     </div>
   );
 
-  // Render product not found state
   if (!product) return <p className="text-center text-gray-500">Product with ID: {id} not found.</p>;
 
-  // Function to render stars based on rating
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
@@ -86,9 +69,9 @@ export default function ProductDetails() {
     return (
       <div className="flex items-center">
         {[...Array(fullStars)].map((_, index) => (
-          <FontAwesomeIcon key={index} icon={faStar} className="text-yellow-500" />
+          <FontAwesomeIcon key={index} icon={faStar} className="text-yellow-400" />
         ))}
-        {hasHalfStar && <FontAwesomeIcon icon={faStarHalfAlt} className="text-yellow-500" />}
+        {hasHalfStar && <FontAwesomeIcon icon={faStarHalfAlt} className="text-yellow-400" />}
         {[...Array(emptyStars)].map((_, index) => (
           <FontAwesomeIcon key={index} icon={faStarEmpty} className="text-gray-300" />
         ))}
@@ -100,21 +83,67 @@ export default function ProductDetails() {
   const sortedReviews = () => {
     return product.reviews.slice().sort((a, b) => {
       if (sortBy === 'date') {
-        return new Date(b.date) - new Date(a.date); // Sort by date (newest first)
+        return new Date(b.date) - new Date(a.date);
       } else if (sortBy === 'rating') {
-        return b.rating - a.rating; // Sort by rating (highest first)
+        return b.rating - a.rating;
       }
       return 0;
     });
   };
 
+  // Function to calculate total ratings
+  const calculateRatingsSummary = () => {
+    const totalRatings = product.reviews.length;
+    const ratingCounts = Array(6).fill(0); // Array to hold counts for each star (1-5)
+    let totalStars = 0;
+
+    product.reviews.forEach((review) => {
+      const rating = Math.round(review.rating);
+      if (rating >= 1 && rating <= 5) {
+        ratingCounts[rating]++;
+        totalStars += rating;
+      }
+    });
+
+    const averageRating = totalStars > 0 ? (totalStars / totalRatings).toFixed(1) : 0;
+
+    return { ratingCounts, totalRatings, averageRating };
+  };
+
+  const { ratingCounts, totalRatings, averageRating } = calculateRatingsSummary();
+
+  // Function to render the updated rating summary
+  const renderRatingSummary = () => (
+    <div className="bg-gray-900 text-white p-6 rounded-lg shadow-lg mb-6">
+      <div className="flex items-center mb-4">
+        <span className="text-4xl font-bold mr-2">{averageRating}</span>
+        <div>
+          {renderStars(parseFloat(averageRating))}
+          <p className="text-sm">{totalRatings} Reviews</p>
+        </div>
+      </div>
+      {[5, 4, 3, 2, 1].map((star) => (
+        <div key={star} className="flex items-center mb-2">
+          <span className="w-8">{star} ★</span>
+          <div className="flex-grow mx-2 bg-gray-700 h-2 rounded-full overflow-hidden">
+            <div 
+              className="bg-yellow-400 h-full" 
+              style={{ width: `${(ratingCounts[star] / totalRatings) * 100}%` }}
+            ></div>
+          </div>
+          <span className="w-8 text-right">{ratingCounts[star]}</span>
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <>
       <Head>
-        <title>{product.title}</title> {/* Set the dynamic title */}
-        <meta name="description" content={product.description} /> {/* Set the dynamic description */}
+        <title>{product.title}</title>
+        <meta name="description" content={product.description} />
       </Head>
-      <Header /> {/* Include the Header component */}
+      <Header />
       <div className="pt-20 p-8 max-w-6xl mx-auto bg-gradient-to-r from-blue-100 to-green-100 shadow-lg rounded-lg mb-8">
         <button
           onClick={handleGoBack}
@@ -123,27 +152,19 @@ export default function ProductDetails() {
           Go Back
         </button>
         <h1 className="text-4xl font-extrabold text-gray-800 mb-6 text-center">{product.title}</h1>
-        <ImageGallery images={product.images} /> {/* Display the product images */}
+        <ImageGallery images={product.images} />
         
         <div className="bg-white p-6 rounded-lg shadow-lg mb-6 border-t-8 border-gradient-to-r from-yellow-400 via-red-500 to-pink-500">
-          {/* Display product category */}
           <p className="text-lg font-semibold text-blue-800 mb-2">Category: <span className="font-normal text-gray-600">{product.category}</span></p>
-          
-          {/* Display product tags */}
           <p className="text-lg font-semibold text-blue-800 mb-2">Tags: <span className="font-normal text-gray-600">{product.tags.join(', ')}</span></p>
-          
-          {/* Display product price */}
           <p className="text-2xl font-bold text-green-600 mb-4">Price: ${product.price}</p>
-          
-          {/* Display product rating */}
           <p className="text-lg mb-2">Rating: {renderStars(product.rating)}</p>
-          
-          {/* Display product stock and availability */}
           <p className="text-lg mb-4">Stock: <span className="font-semibold text-red-500">{product.stock}</span> available</p>
-          
-          {/* Display product description */}
           <p className="text-base mb-6 text-gray-700">{product.description}</p>
         </div>
+
+        {/* Updated Ratings Summary Section */}
+        {renderRatingSummary()}
 
         {/* Sorting options for reviews */}
         <div className="mb-4">
@@ -168,13 +189,13 @@ export default function ProductDetails() {
                 <li key={index} className="border-b border-gray-300 pb-4">
                   <p className="font-semibold text-gray-800">{review.reviewerName}</p>
                   <p className="text-sm text-gray-500">{new Date(review.date).toLocaleDateString()}</p>
-                  <p className="mt-1">Rating: {renderStars(review.rating)}</p>
-                  <p className="mt-1 text-gray-700">{review.comment}</p>
+                  <p className="mt-1">{renderStars(review.rating)}</p>
+                  <p className="mt-2 text-gray-700">{review.comment}</p>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-gray-500">No reviews available</p>
+            <p className="text-gray-500">No reviews yet.</p>
           )}
         </div>
       </div>

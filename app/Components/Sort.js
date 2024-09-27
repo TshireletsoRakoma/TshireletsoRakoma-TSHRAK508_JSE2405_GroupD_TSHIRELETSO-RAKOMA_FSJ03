@@ -20,13 +20,13 @@ const Sort = ({ sortOrder, setSortOrder }) => {
   };
 
   return (
-    <div className="mb-4">
-      <label htmlFor="sortOrder" className="mr-2">Sort By:</label>
+    <div className="mb-4 flex items-center">
+      <label htmlFor="sortOrder" className="mr-2 font-semibold text-gray-700">Sort By:</label>
       <select
         id="sortOrder"
         value={sortOrder}
         onChange={handleSortChange}
-        className="border p-2 rounded"
+        className="border border-gray-300 rounded-lg p-2 transition duration-200 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none"
       >
         <option value="asc">Ascending</option>
         <option value="desc">Descending</option>

@@ -12,18 +12,22 @@ import React from 'react';
  */
 const Filter = ({ selectedCategory, setSelectedCategory, categories }) => {
   return (
-    <select
-      value={selectedCategory}
-      onChange={(e) => setSelectedCategory(e.target.value)}
-      className="border rounded p-2 mb-4"
-    >
-      <option value="">All Categories</option>
-      {categories.map((category) => (
-        <option key={category} value={category}>
-          {category}
-        </option>
-      ))}
-    </select>
+    <div className="mb-4 flex items-center">
+      <label htmlFor="filter" className="mr-2 font-semibold text-gray-700">Filter By Category:</label>
+      <select
+        id="filter"
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
+        className="border border-gray-300 rounded-lg p-2 transition duration-200 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      >
+        <option value="">All Categories</option>
+        {categories.map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 
