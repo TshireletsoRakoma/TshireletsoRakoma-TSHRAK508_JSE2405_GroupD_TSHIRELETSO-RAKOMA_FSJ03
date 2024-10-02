@@ -3,6 +3,7 @@
 import "./globals.css";
 import { useEffect, useState } from 'react'; // Import useEffect for fetching data
 import { fetchProducts } from './lib/api';
+import { addProductToFirestore } from '../firebase'; // Import the product upload function
 import ProductList from './Components/ProductList';
 import Pagination from './Components/Pagination';
 import ErrorBoundary from './Components/ErrorBoundary';
@@ -13,7 +14,7 @@ import Filter from './Components/Filter'; // Import the Filter component
 import { ProductProvider } from './Components/ProductContext'; // Import ProductProvider
 
 /**
- * The main component for the homepage that displays a list of products.
+ * The main component for the homepage that displays a list of products and handles product uploads.
  * 
  * This component fetches a paginated list of products based on the `page` query parameter,
  * search term, and sort order, rendering the product list, pagination controls, and handling errors.
@@ -33,6 +34,24 @@ export default function Home({ searchParams }) {
   const [selectedCategory, setSelectedCategory] = useState(''); // State for selected category
   const [categories, setCategories] = useState([]); // State for categories
   const [loading, setLoading] = useState(true); // State for loading indicator
+
+  // Example product to upload
+  const exampleProduct = {
+    name: 'Example Product',
+    description: 'This is an example product.',
+    price: 29.99,
+    category: 'Books',
+  };
+
+  // Function to handle product upload
+  const handleUpload = async () => {
+    try {
+      await addProductToFirestore(exampleProduct);
+      alert('Product uploaded successfully!');
+    } catch (error) {
+      alert('Failed to upload product: ' + error.message);
+    }
+  };
 
   // Function to fetch products
   const fetchProductData = async () => {
@@ -145,6 +164,14 @@ export default function Home({ searchParams }) {
           <button onClick={handleReset} className="bg-red-500 text-white p-2 rounded mb-4">
             Reset Filters
           </button>
+
+          {/* Add Product Upload Section */}
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold">Upload a Product</h3>
+            <button onClick={handleUpload} className="bg-blue-500 text-white p-2 rounded">
+              Upload Example Product
+            </button>
+          </div>
 
           <ErrorBoundary fallback={<p>Error loading products. Please try again later.</p>}>
             {loading ? ( // Show loader while loading

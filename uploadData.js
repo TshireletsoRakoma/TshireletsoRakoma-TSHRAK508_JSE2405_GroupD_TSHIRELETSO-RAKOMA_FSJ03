@@ -1,9 +1,9 @@
 import { config } from "dotenv";
-import { products, categories } from "./data.js";
+import { products, categories } from "./data.js"; // Ensure products and categories are structured correctly
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
-config();
+config(); // Load environment variables
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -16,9 +16,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
 
+// Function to upload products to Firestore
 async function uploadProducts(products) {
   try {
     // Loop through the products array
@@ -39,6 +39,7 @@ async function uploadProducts(products) {
   }
 }
 
+// Function to upload categories to Firestore
 async function uploadCategories(categories) {
   try {
     // Create a reference to the 'categories' document
@@ -53,5 +54,6 @@ async function uploadCategories(categories) {
   }
 }
 
+// Call functions to upload products and categories
 uploadProducts(products);
 uploadCategories(categories);
