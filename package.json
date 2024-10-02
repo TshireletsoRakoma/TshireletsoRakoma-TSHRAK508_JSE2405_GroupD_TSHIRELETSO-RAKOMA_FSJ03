@@ -2,6 +2,7 @@
   "name": "fsj_01",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +12,8 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "dotenv": "^16.4.5",
+    "firebase": "^10.14.0",
     "next": "^14.2.13",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
