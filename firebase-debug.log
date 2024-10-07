@@ -1,0 +1,93 @@
+[debug] [2024-10-03T13:33:31.146Z] ----------------------------------------------------------------------
+[debug] [2024-10-03T13:33:31.148Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Software.Engineer40\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-10-03T13:33:31.148Z] CLI Version:   13.20.2
+[debug] [2024-10-03T13:33:31.148Z] Platform:      win32
+[debug] [2024-10-03T13:33:31.149Z] Node Version:  v22.8.0
+[debug] [2024-10-03T13:33:31.149Z] Time:          Thu Oct 03 2024 15:33:31 GMT+0200 (South Africa Standard Time)
+[debug] [2024-10-03T13:33:31.149Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-10-03T13:33:31.157Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-03T13:33:31.157Z] > authorizing via signed-in user (tshirejohannes614@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Software.Engineer40\Documents\GitHub\TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-10-03T13:33:46.904Z] Checked if tokens are valid: true, expires at: 1727964250735
+[debug] [2024-10-03T13:33:46.904Z] Checked if tokens are valid: true, expires at: 1727964250735
+[debug] [2024-10-03T13:33:46.908Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2024-10-03T13:33:48.193Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2024-10-03T13:33:48.193Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project next-ecommerce-f0bab (next-ecommerce) 
+[info] 
+=== Hosting Setup
+[debug] [2024-10-03T13:33:51.870Z] Checked if tokens are valid: true, expires at: 1727964250735
+[debug] [2024-10-03T13:33:51.870Z] Checked if tokens are valid: true, expires at: 1727964250735
+[debug] [2024-10-03T13:33:51.870Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/next-ecommerce-f0bab [none]
+[debug] [2024-10-03T13:33:52.284Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/next-ecommerce-f0bab 200
+[debug] [2024-10-03T13:33:52.284Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/next-ecommerce-f0bab {"projectId":"next-ecommerce-f0bab","projectNumber":"224997278044","displayName":"next-ecommerce","name":"projects/next-ecommerce-f0bab","resources":{"hostingSite":"next-ecommerce-f0bab"},"state":"ACTIVE","etag":"1_b6d8d940-0be1-426d-a3eb-d06e5ab65846"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[info] i  Skipping write of public/404.html 
+[debug] [2024-10-03T13:34:33.733Z] >>> [apiv2][query] GET https://www.gstatic.com/firebasejs/releases.json [none]
+[debug] [2024-10-03T13:34:34.244Z] <<< [apiv2][status] GET https://www.gstatic.com/firebasejs/releases.json 200
+[debug] [2024-10-03T13:34:34.244Z] <<< [apiv2][body] GET https://www.gstatic.com/firebasejs/releases.json {"current":{"version":"10.14.0","browserURL":"https://www.gstatic.com/firebasejs/10.14.0/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/10.14.0/firebase.tgz"},"live":{"version":"10.14","browserURL":"https://www.gstatic.com/firebasejs/live/10.14/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/live/10.14/firebase.tgz"},"components":{"analytics":"https://www.gstatic.com/firebasejs/10.14.0/firebase-analytics.js","app":"https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js","app-check":"https://www.gstatic.com/firebasejs/10.14.0/firebase-app-check.js","auth":"https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js","auth/cordova":"https://www.gstatic.com/firebasejs/10.14.0/firebase-auth/cordova.js","auth/web-extension":"https://www.gstatic.com/firebasejs/10.14.0/firebase-auth/web-extension.js","functions":"https://www.gstatic.com/firebasejs/10.14.0/firebase-functions.js","firestore":"https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js","firestore/lite":"https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore/lite.js","installations":"https://www.gstatic.com/firebasejs/10.14.0/firebase-installations.js","storage":"https://www.gstatic.com/firebasejs/10.14.0/firebase-storage.js","performance":"https://www.gstatic.com/firebasejs/10.14.0/firebase-performance.js","remote-config":"https://www.gstatic.com/firebasejs/10.14.0/firebase-remote-config.js","messaging":"https://www.gstatic.com/firebasejs/10.14.0/firebase-messaging.js","messaging/sw":"https://www.gstatic.com/firebasejs/10.14.0/firebase-messaging/sw.js","database":"https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js","data-connect":"https://www.gstatic.com/firebasejs/10.14.0/firebase-data-connect.js","vertexai-preview":"https://www.gstatic.com/firebasejs/10.14.0/firebase-vertexai-preview.js","firestore.memory":"https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.memory.js"}}
+[info] i  Skipping write of public/index.html 
+[info] 
+[info] i  Detected a .git folder at C:\Users\Software.Engineer40\Documents\GitHub\TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=330160610&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2024-10-03T13:34:41.957Z] >>> [apiv2][query] POST https://github.com/login/oauth/access_token [none]
+[debug] [2024-10-03T13:34:41.958Z] >>> [apiv2][body] POST https://github.com/login/oauth/access_token [stream]
+[debug] [2024-10-03T13:34:42.487Z] <<< [apiv2][status] POST https://github.com/login/oauth/access_token 200
+[debug] [2024-10-03T13:34:42.487Z] <<< [apiv2][body] POST https://github.com/login/oauth/access_token {"access_token":"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","token_type":"bearer","scope":"read:user,repo"}
+[debug] [2024-10-03T13:34:42.496Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2024-10-03T13:34:43.124Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2024-10-03T13:34:43.124Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"TshireletsoRakoma","id":156686384,"node_id":"U_kgDOCVbYMA","avatar_url":"https://avatars.githubusercontent.com/u/156686384?v=4","gravatar_id":"","url":"https://api.github.com/users/TshireletsoRakoma","html_url":"https://github.com/TshireletsoRakoma","followers_url":"https://api.github.com/users/TshireletsoRakoma/followers","following_url":"https://api.github.com/users/TshireletsoRakoma/following{/other_user}","gists_url":"https://api.github.com/users/TshireletsoRakoma/gists{/gist_id}","starred_url":"https://api.github.com/users/TshireletsoRakoma/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/TshireletsoRakoma/subscriptions","organizations_url":"https://api.github.com/users/TshireletsoRakoma/orgs","repos_url":"https://api.github.com/users/TshireletsoRakoma/repos","events_url":"https://api.github.com/users/TshireletsoRakoma/events{/privacy}","received_events_url":"https://api.github.com/users/TshireletsoRakoma/received_events","type":"User","site_admin":false,"name":null,"company":null,"blog":"","location":null,"email":null,"hireable":null,"bio":null,"twitter_username":null,"notification_email":null,"public_repos":53,"public_gists":0,"followers":0,"following":3,"created_at":"2024-01-15T14:40:01Z","updated_at":"2024-10-02T11:44:53Z","private_gists":0,"total_private_repos":15,"owned_private_repos":15,"disk_usage":107813,"collaborators":0,"two_factor_authentication":false,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] +  Success! Logged into GitHub as TshireletsoRakoma 
+[info] 
+[debug] [2024-10-03T13:35:54.852Z] >>> [apiv2][query] GET https://api.github.com/repos/TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ /actions/secrets/public-key type=owner
+[debug] [2024-10-03T13:35:55.493Z] <<< [apiv2][status] GET https://api.github.com/repos/TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ /actions/secrets/public-key 404
+[debug] [2024-10-03T13:35:55.493Z] <<< [apiv2][body] GET https://api.github.com/repos/TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ /actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest","status":"404"}
+[info] 
+[info] 
+[error] !  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-10-03T13:37:18.761Z] >>> [apiv2][query] GET https://api.github.com/repos/TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ /actions/secrets/public-key type=owner
+[debug] [2024-10-03T13:37:19.383Z] <<< [apiv2][status] GET https://api.github.com/repos/TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ /actions/secrets/public-key 404
+[debug] [2024-10-03T13:37:19.383Z] <<< [apiv2][body] GET https://api.github.com/repos/TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ /actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest","status":"404"}
+[info] 
+[info] 
+[error] !  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-10-03T13:37:27.093Z] >>> [apiv2][query] GET https://api.github.com/repos/TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ /actions/secrets/public-key type=owner
+[debug] [2024-10-03T13:37:29.136Z] *** [apiv2] error from fetch(https://api.github.com/repos/TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ /actions/secrets/public-key?type=owner, {"headers":{},"method":"GET"}): FetchError: request to https://api.github.com/repos/TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ%20/actions/secrets/public-key?type=owner failed, reason: connect ECONNREFUSED 20.87.245.6:443
+[debug] [2024-10-03T13:38:04.152Z] >>> [apiv2][query] GET https://api.github.com/repos/TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ /actions/secrets/public-key type=owner
+[debug] [2024-10-03T13:38:06.205Z] *** [apiv2] error from fetch(https://api.github.com/repos/TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ /actions/secrets/public-key?type=owner, {"headers":{},"method":"GET"}): FetchError: request to https://api.github.com/repos/TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ%20/actions/secrets/public-key?type=owner failed, reason: connect ECONNREFUSED 20.87.245.6:443

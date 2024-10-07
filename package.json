@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@firebasegen/default": "file:generated/javascript/default",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "dotenv": "^16.4.5",

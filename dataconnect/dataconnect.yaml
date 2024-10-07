@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "TshireletsoRakoma-TSHRAK508_JSE2405_GroupD_TSHIRELETSO-RAKOMA_FSJ-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
