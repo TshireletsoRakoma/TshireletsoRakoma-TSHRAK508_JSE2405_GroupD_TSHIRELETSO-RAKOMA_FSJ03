@@ -1,7 +1,7 @@
 // firebaseClient.js
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth"; // Import Firebase Authentication
+import { getAuth } from "firebase/auth";
 import { config } from "dotenv";
 
 config();
@@ -15,9 +15,16 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID,
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app); // Initialize Firebase Authentication
+let app, db, auth;
+
+try {
+  // Initialize Firebase
+  app = initializeApp(firebaseConfig);
+  db = getFirestore(app);
+  auth = getAuth(app);
+  console.log("Firebase successfully initialized");
+} catch (error) {
+  console.error("Error initializing Firebase:", error);
+}
 
 export { db, auth };

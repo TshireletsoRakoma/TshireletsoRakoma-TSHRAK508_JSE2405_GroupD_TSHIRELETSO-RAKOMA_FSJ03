@@ -14,7 +14,7 @@ import ProductCard from './ProductCard';
  * @param {string[]} products[].tags - Array of tags associated with the product.
  * @param {number} products[].stock - Number of items available in stock.
  * @param {string} products[].description - Description of the product.
- * @returns {JSX.Element} The component rendering a grid of `ProductCard` components.
+ * @returns {JSX.Element} The component rendering a grid of ProductCard components.
  */
 export default function ProductList({ products }) {
   return (

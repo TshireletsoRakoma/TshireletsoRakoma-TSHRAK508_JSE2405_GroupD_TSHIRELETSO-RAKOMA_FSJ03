@@ -1,5 +1,5 @@
 // pages/api/categories.js
-import { db } from '../../firebaseClient';
+import { db } from '../firebaseClient';
 import { collection, getDocs } from 'firebase/firestore';
 
 export default async function handler(req, res) {

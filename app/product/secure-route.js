@@ -1,5 +1,5 @@
-// pages/api/secure-route.js
-import { verifyToken } from '../../middleware/authMiddleware';
+// products/secure-route.js
+import { verifyToken } from '../middleware/authMiddleware';
 
 export default async function handler(req, res) {
   verifyToken(req, res, async () => {

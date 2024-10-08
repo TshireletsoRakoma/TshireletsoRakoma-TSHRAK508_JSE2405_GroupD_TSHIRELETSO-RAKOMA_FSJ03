@@ -2,7 +2,7 @@
 
 import "./globals.css";
 import { useEffect, useState } from 'react'; // Import useEffect for fetching data
-import { fetchProducts } from './lib/api';
+import { fetchProducts } from './lib/api'; // Make sure this import is correct
 import { addProductToFirestore } from '../firebase'; // Import the product upload function
 import ProductList from './Components/ProductList';
 import Pagination from './Components/Pagination';
@@ -35,6 +35,8 @@ export default function Home({ searchParams }) {
   const [categories, setCategories] = useState([]); // State for categories
   const [loading, setLoading] = useState(true); // State for loading indicator
 
+  const productsPerPage = 20; // Define the number of products per page
+
   // Example product to upload
   const exampleProduct = {
     name: 'Example Product',
@@ -59,7 +61,7 @@ export default function Home({ searchParams }) {
     setError(null); // Reset error before fetching
     setLoading(true); // Set loading to true before fetching
     try {
-      const fetchedProducts = await fetchProducts(1, 9999, searchTerm, sortOrder); // Fetch all products (or max number) without pagination
+      const fetchedProducts = await fetchProductsFromAPI(page, productsPerPage, searchTerm, sortOrder); // Fetch products based on page, search term, and sort order
       console.log('Fetched products:', fetchedProducts); // Debug log for fetched products
       setAllProducts(fetchedProducts); // Update state with all fetched products
     } catch (error) {
@@ -73,7 +75,7 @@ export default function Home({ searchParams }) {
   // Function to fetch categories
   const fetchCategories = async () => {
     try {
-      const response = await fetch('https://next-ecommerce-api.vercel.app/categories'); // Update with your API URL
+      const response = await fetch('http:localhost:3000/categories'); // Update with your API URL
       const data = await response.json();
       setCategories(data); // Set the fetched categories
     } catch (error) {
@@ -94,7 +96,7 @@ export default function Home({ searchParams }) {
   // Use effect to fetch products on component mount
   useEffect(() => {
     fetchProductData(); // Fetch all products initially
-  }, []);
+  }, [page, searchTerm, sortOrder]); // Re-fetch when page, searchTerm or sortOrder changes
 
   // Use effect to fetch categories on component mount
   useEffect(() => {
@@ -128,8 +130,8 @@ export default function Home({ searchParams }) {
     });
 
     // Paginate the sorted results for the current page
-    const startIndex = (page - 1) * 20; // Assuming 20 products per page
-    const paginatedProducts = sortedProducts.slice(startIndex, startIndex + 20);
+    const startIndex = (page - 1) * productsPerPage; // Assuming 20 products per page
+    const paginatedProducts = sortedProducts.slice(startIndex, startIndex + productsPerPage);
 
     setDisplayedProducts(paginatedProducts); // Update state with products for current page
   }, [allProducts, selectedCategory, sortOrder, page, searchTerm]); // Update when products, filters, or sort order change
@@ -140,6 +142,9 @@ export default function Home({ searchParams }) {
     setSelectedCategory(''); // Clear selected category
     setSortOrder('asc'); // Reset sort order to default
   };
+
+  // Calculate total pages for pagination
+  const totalPages = Math.ceil(allProducts.length / productsPerPage); // Calculate total pages
 
   return (
     <ProductProvider> {/* Wrap the component with ProductProvider */}
@@ -185,7 +190,8 @@ export default function Home({ searchParams }) {
             )}
           </ErrorBoundary>
           
-          <Pagination currentPage={page} />
+          {/* Pagination component with current page and total pages */}
+          <Pagination currentPage={page} totalPages={totalPages} />
         </main>
 
         <style jsx>{`
@@ -206,4 +212,24 @@ export default function Home({ searchParams }) {
       </>
     </ProductProvider>
   );
+}
+
+/**
+ * Fetch a list of products from the API with pagination, search, and sort capabilities.
+ * 
+ * @param {number} page - The current page to fetch.
+ * @param {number} limit - The number of products to fetch per page.
+ * @param {string} search - The search term to filter products.
+ * @param {string} sort - The order to sort the products (ascending or descending).
+ * @returns {Promise<Array>} The fetched products.
+ */
+async function fetchProductsFromAPI(page, limit, search = '', sort = 'asc') {
+  console.log('123')
+  // const url = `https://next-ecommerce-api.vercel.app/products?_page=${page}&_limit=${limit}&search=${search}&sort=${sort}`; // Update with your API URL
+  const url = `/api/products`
+  const response = await fetch(url);
+  console.log(response);
+  if (!response.ok) throw new Error('Failed to fetch products');
+  const data = await response.json();
+  return data; // Return the fetched products
 }

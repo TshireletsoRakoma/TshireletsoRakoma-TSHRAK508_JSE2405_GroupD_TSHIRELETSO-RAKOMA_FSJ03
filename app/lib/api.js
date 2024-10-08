@@ -1,3 +1,6 @@
+// Define the base API URL, using an environment variable for flexibility.
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+
 /**
  * Fetch a paginated list of products from the API with optional search query and sorting order.
  *
@@ -10,9 +13,11 @@
  */
 export async function fetchProducts(page = 1, limit = 20, searchTerm = "", sortOrder = "asc") {
   const skip = (page - 1) * limit;
-  
-  let url = `https://next-ecommerce-api.vercel.app/products?limit=${limit}&skip=${skip}&sort=${sortOrder}`;
-  
+
+  // Construct the API URL with query parameters for pagination, sorting, and searching.
+  let url = `${API_URL}/products?limit=${limit}&skip=${skip}&sort=${sortOrder}`;
+
+  // Add search term to the URL if provided.
   if (searchTerm) {
     url += `&search=${encodeURIComponent(searchTerm)}`;
   }
@@ -21,6 +26,7 @@ export async function fetchProducts(page = 1, limit = 20, searchTerm = "", sortO
 
   try {
     const response = await fetch(url);
+    // Check if the response is not OK and throw an error.
     if (!response.ok) {
       throw new Error('Failed to fetch products');
     }
@@ -43,8 +49,9 @@ export async function fetchProducts(page = 1, limit = 20, searchTerm = "", sortO
 export async function fetchProductById(id) {
   console.log(`Fetching product with ID: ${id}`);
   try {
-    const response = await fetch(`https://next-ecommerce-api.vercel.app/products/${id}`);
-    
+    const response = await fetch(`${API_URL}/products/${id}`);
+
+    // Check if the response is not OK and throw an error.
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -52,6 +59,7 @@ export async function fetchProductById(id) {
     const data = await response.json();
     console.log('Fetched product data:', data);
 
+    // Check if the data is found.
     if (!data) {
       throw new Error(`Product with ID: ${id} not found`);
     }

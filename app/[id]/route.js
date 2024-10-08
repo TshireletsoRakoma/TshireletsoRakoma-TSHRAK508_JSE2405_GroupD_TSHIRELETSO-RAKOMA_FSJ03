@@ -1,8 +1,8 @@
 // pages/api/product/[id].js
-import { db } from '../../../firebaseClient';
+import { db } from '../firebaseClient';
 import { doc, getDoc } from 'firebase/firestore';
 
-export default async function handler(req, res) {
+export async function GET(req, res) {
   const { id } = req.query;
 
   try {

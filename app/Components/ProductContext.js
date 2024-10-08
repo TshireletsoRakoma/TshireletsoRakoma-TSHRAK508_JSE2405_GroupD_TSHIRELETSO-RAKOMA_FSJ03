@@ -20,6 +20,24 @@ export const ProductProvider = ({ children }) => {
   const [error, setError] = useState(null); // Error state
   const [page, setPage] = useState(1); // Current page
 
+  // Load saved states from local storage
+  useEffect(() => {
+    const savedSearchTerm = localStorage.getItem('searchTerm');
+    const savedSortOrder = localStorage.getItem('sortOrder');
+    const savedCategory = localStorage.getItem('selectedCategory');
+
+    if (savedSearchTerm) setSearchTerm(savedSearchTerm);
+    if (savedSortOrder) setSortOrder(savedSortOrder);
+    if (savedCategory) setSelectedCategory(savedCategory);
+  }, []);
+
+  // Save states to local storage whenever they change
+  useEffect(() => {
+    localStorage.setItem('searchTerm', searchTerm);
+    localStorage.setItem('sortOrder', sortOrder);
+    localStorage.setItem('selectedCategory', selectedCategory);
+  }, [searchTerm, sortOrder, selectedCategory]);
+
   // Fetch products based on search term and sort order
   const fetchProductData = async () => {
     setError(null); // Reset error state
@@ -62,6 +80,7 @@ export const ProductProvider = ({ children }) => {
       displayedProducts, error, page, setPage
     }}>
       {children}
+      {error && <div className="error-message">{error.message}</div>} {/* Error message display */}
     </ProductContext.Provider>
   );
 };
