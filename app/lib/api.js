@@ -1,3 +1,5 @@
+// api.js (or a similar file for API utilities)
+
 // Define the base API URL, using an environment variable for flexibility.
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
@@ -15,7 +17,7 @@ export async function fetchProducts(page = 1, limit = 20, searchTerm = "", sortO
   const skip = (page - 1) * limit;
 
   // Construct the API URL with query parameters for pagination, sorting, and searching.
-  let url = `${API_URL}/products?limit=${limit}&skip=${skip}&sort=${sortOrder}`;
+  let url = `${API_URL}/api/products?limit=${limit}&skip=${skip}&sort=${sortOrder}`;
 
   // Add search term to the URL if provided.
   if (searchTerm) {
@@ -49,8 +51,8 @@ export async function fetchProducts(page = 1, limit = 20, searchTerm = "", sortO
 export async function fetchProductById(id) {
   console.log(`Fetching product with ID: ${id}`);
   try {
-    const response = await fetch(`${API_URL}/products/${id}`);
-
+    const response = await fetch(`${API_URL}/api/productDetails/${id}`);
+    console.log(response)
     // Check if the response is not OK and throw an error.
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

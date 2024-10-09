@@ -12,6 +12,7 @@ import SearchBar from './Components/SearchBar'; // Import the SearchBar componen
 import Sort from './Components/Sort'; // Import the Sort component
 import Filter from './Components/Filter'; // Import the Filter component
 import { ProductProvider } from './Components/ProductContext'; // Import ProductProvider
+import LoginLogout from "./Components/LoginLogout";
 
 /**
  * The main component for the homepage that displays a list of products and handles product uploads.
@@ -170,13 +171,7 @@ export default function Home({ searchParams }) {
             Reset Filters
           </button>
 
-          {/* Add Product Upload Section */}
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold">Upload a Product</h3>
-            <button onClick={handleUpload} className="bg-blue-500 text-white p-2 rounded">
-              Upload Example Product
-            </button>
-          </div>
+         
 
           <ErrorBoundary fallback={<p>Error loading products. Please try again later.</p>}>
             {loading ? ( // Show loader while loading

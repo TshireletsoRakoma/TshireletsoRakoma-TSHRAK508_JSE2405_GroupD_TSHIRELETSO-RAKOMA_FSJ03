@@ -7,6 +7,8 @@ import Header from '../../Components/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt, faStar as faStarEmpty } from '@fortawesome/free-solid-svg-icons';
 import Head from 'next/head';
+import WithAuth from '@/app/context/withAuth';
+
 
 // New Loader component
 const Loader = () => (
@@ -15,7 +17,7 @@ const Loader = () => (
   </div>
 );
 
-export default function ProductDetails() {
+ function ProductDetails() {
   const { id } = useParams();
   const router = useRouter();
   const [product, setProduct] = useState(null);
@@ -143,7 +145,7 @@ export default function ProductDetails() {
         <title>{product.title}</title>
         <meta name="description" content={product.description} />
       </Head>
-      <Header />
+      
       <div className="pt-20 p-8 max-w-6xl mx-auto bg-gradient-to-r from-blue-100 to-green-100 shadow-lg rounded-lg mb-8">
         <button
           onClick={handleGoBack}
@@ -186,19 +188,21 @@ export default function ProductDetails() {
           {product.reviews && product.reviews.length > 0 ? (
             <ul className="space-y-4">
               {sortedReviews().map((review, index) => (
-                <li key={index} className="border-b border-gray-300 pb-4">
-                  <p className="font-semibold text-gray-800">{review.reviewerName}</p>
+                <li key={index} className="border-b pb-2">
+                  <p className="text-lg font-semibold">{review.username}</p>
                   <p className="text-sm text-gray-500">{new Date(review.date).toLocaleDateString()}</p>
-                  <p className="mt-1">{renderStars(review.rating)}</p>
-                  <p className="mt-2 text-gray-700">{review.comment}</p>
+                  <p className="text-lg mb-2">{renderStars(review.rating)}</p>
+                  <p className="text-gray-700">{review.comment}</p>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-gray-500">No reviews yet.</p>
+            <p className="text-gray-600">No reviews yet. Be the first to leave a review!</p>
           )}
         </div>
       </div>
     </>
   );
 }
+
+export default WithAuth(ProductDetails);
