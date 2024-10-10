@@ -33,6 +33,7 @@ export async function fetchProducts(page = 1, limit = 20, searchTerm = "", sortO
       throw new Error('Failed to fetch products');
     }
     const data = await response.json();
+    console.log(data[0])
     console.log('Fetched products:', data);
     return data;
   } catch (error) {

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { signUp } from '../utils/auth';
 
+
 const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

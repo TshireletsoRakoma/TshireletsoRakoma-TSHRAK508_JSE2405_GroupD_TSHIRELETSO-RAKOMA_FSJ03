@@ -28,7 +28,7 @@ export default function Home({ searchParams }) {
   const params = new URLSearchParams(searchParams);
   const page = Number(params.get('page')) || 1;
   const [searchTerm, setSearchTerm] = useState(params.get('search') || "");
-  const [sortOrder, setSortOrder] = useState('asc'); // State to store sort order
+  const [sortOrder, setSortOrder] = useState(''); // State to store sort order
   const [allProducts, setAllProducts] = useState([]); // State to store all fetched products
   const [displayedProducts, setDisplayedProducts] = useState([]); // State to store products for current page
   const [error, setError] = useState(null); // State to store error if occurs
@@ -125,8 +125,11 @@ export default function Home({ searchParams }) {
     const sortedProducts = [...searchedProducts].sort((a, b) => {
       if (sortOrder === 'asc') {
         return a.price - b.price; // Sort by price ascending
-      } else {
+      } else if(sortOrder === 'asc') {
         return b.price - a.price; // Sort by price descending
+      }
+      else{
+        return
       }
     });
 

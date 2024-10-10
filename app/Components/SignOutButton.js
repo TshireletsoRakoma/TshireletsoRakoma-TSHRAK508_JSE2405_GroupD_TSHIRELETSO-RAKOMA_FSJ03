@@ -10,7 +10,14 @@ const SignOutButton = () => {
     }
   };
 
-  return <button onClick={handleSignOut}>Sign Out</button>;
+  return (
+    <button
+      onClick={handleSignOut}
+      className="p-2 bg-red-500 text-white rounded-md text-lg cursor-pointer transition-colors duration-300 hover:bg-red-600"
+    >
+      Sign Out
+    </button>
+  );
 };
 
 export default SignOutButton;

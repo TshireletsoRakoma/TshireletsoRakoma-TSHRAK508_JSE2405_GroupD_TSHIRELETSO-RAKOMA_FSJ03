@@ -28,6 +28,7 @@ const Sort = ({ sortOrder, setSortOrder }) => {
         onChange={handleSortChange}
         className="border border-gray-300 rounded-lg p-2 transition duration-200 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none"
       >
+         <option value="">Default</option>
         <option value="asc">Ascending</option>
         <option value="desc">Descending</option>
       </select>
